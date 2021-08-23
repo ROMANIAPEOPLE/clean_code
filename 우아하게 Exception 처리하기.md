@@ -98,7 +98,7 @@
    ```java
    ...
    if(p1 == null || p2 == null) {
-   		throw InvalidArgumentException( ....);
+   	throw InvalidArgumentException( ....);
    }
    ...
    ```
