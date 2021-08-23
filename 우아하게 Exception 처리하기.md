@@ -1,6 +1,7 @@
 ## CH07. 예외처리
 
-<img width="506" alt="스크린샷 2021-08-23 오후 11 09 58" src="https://user-images.githubusercontent.com/39195377/130473107-f18f0457-1f83-4650-83ed-7981509600f6.png">
+<img width="673" alt="스크린샷 2021-08-24 오전 12 16 34" src="https://user-images.githubusercontent.com/39195377/130473228-d9e36d1b-b0a6-4ec7-bdd6-5b2b3eed19bf.png">
+
 
 ### 🧚 Uncheck Exception을 사용하자.
 
