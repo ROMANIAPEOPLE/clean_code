@@ -65,10 +65,10 @@
    	
    	public UserLevel getuserLevelOrDefault(Long userId) {
    		try {
-   				User user = userRepository.findByUserId(userId);
-   				return usr.getuserLevel();
+   			User user = userRepository.findByUserId(userId);
+   			return usr.getuserLevel();
    		}catch (UserNotFoundException e) {
-   				return USER_BASIC_LEVEL;
+   			return USER_BASIC_LEVEL;
    		}
    }
    ```
@@ -84,10 +84,9 @@
    ```java
    User user = userRepository.findByUserId(userId);
    if(user == null) {
-   		throw new IllegalArgumentException("User is not fount. userId = " + userId)
+   	throw new IllegalArgumentException("User is not fount. userId = " + userId)
    }
    return user;
-   
    }
    ...
    ```
