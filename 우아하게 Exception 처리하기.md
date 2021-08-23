@@ -1,6 +1,6 @@
 ## CH07. 예외처리
 
-![스크린샷 2021-08-24 오전 12.16.34](/Users/kh/Desktop/스크린샷/스크린샷 2021-08-24 오전 12.16.34.png)
+<img width="506" alt="스크린샷 2021-08-23 오후 11 09 58" src="https://user-images.githubusercontent.com/39195377/130473107-f18f0457-1f83-4650-83ed-7981509600f6.png">
 
 ### 🧚 Uncheck Exception을 사용하자.
 
@@ -28,13 +28,12 @@
 
    🐯 로그는 찍을 뿐 할 수 있는 일이 없다.
 
-   ![스크린샷 2021-08-24 오전 12.16.58](/Users/kh/Desktop/스크린샷/스크린샷 2021-08-24 오전 12.16.58.png)
+  <img width="618" alt="스크린샷 2021-08-24 오전 12 16 58" src="https://user-images.githubusercontent.com/39195377/130473138-51367778-0d01-469e-83b2-7338dc9f442d.png">
+
 
    위와 같은 checked Exception의 catch단에서의 예외 처리는 로그를 찍는것 말고는 처리할 수 있는 방법이 없다. 위와 같은 상황에서는 아래 코드처럼 예외를 감싸는 클래스를 만들어서 처리하자.
 
-   
-
-   [사진]
+  <img width="572" alt="스크린샷 2021-08-24 오전 12 17 07" src="https://user-images.githubusercontent.com/39195377/130473156-0e35176f-0079-4697-8dd1-73aeaa55f38b.png">
 
    - checked Exception들을 하나의 PortDeviceFaulure Exception으로 감싸서 던진다.
 
