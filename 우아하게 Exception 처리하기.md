@@ -45,7 +45,7 @@
    - null이 아닌 기본 값
    - 도메인에 맞는 기본 값을 가져온다.
 
-   ```jsx
+   ```java
    UserLevel userLevel = null;
    try {
    	User user = userRepository.findByUserId(userId);
@@ -59,7 +59,7 @@
 
    위 예제 case는 그리 좋은 코드가 아니다.  비즈니스 처리 로직에 try-catch문이 실행되기 때문에 코드의 논리적인 흐름이 끊기게 된다.
 
-   ```jsx
+   ```java
    public class UserService {
    	private static final UserLevel USER_BASIC_LEVEL = UserLevel.BASIC;
    	
@@ -81,7 +81,7 @@
 
    - 기본 값이 없다면, null 대신 예외를 던진다.
 
-   ```jsx
+   ```java
    User user = userRepository.findByUserId(userId);
    if(user == null) {
    		throw new IllegalArgumentException("User is not fount. userId = " + userId)
@@ -96,7 +96,7 @@
 
    위에서 null 체크 지옥이라는 말을 언급한 적이 있는데, 여기서는 예외다. null을 리턴하는 것도 나쁘지만 파라미터로 null을 전달하는것은 더 나쁘다.
 
-   ```jsx
+   ```java
    ...
    if(p1 == null || p2 == null) {
    		throw InvalidArgumentException( ....);
