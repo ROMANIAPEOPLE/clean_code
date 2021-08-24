@@ -1,0 +1,116 @@
+## 경계
+
+### 1. 경계짓기(1) - 우리 코드를 보호하기
+
+🧚 **캡슐화 : 객체의 실제 구현을 외부로부터 감추는 방식**
+
+
+
+🤔 **example : Sensor라는 객체는 어떻게 관리해야 할까?** 
+
+- Sensor Id와 Sensor 객체로 저장하고 싶어서, Sensor Id를 key로, Sensor 객체를 value로 하는 Map을 사용한다.
+- 하지만 Map을 제너릭한 형태로 그대로 사용하면 Map 인터페이스가 제공하는 모든 기능이 외부로 노출된다.
+- Sensor의 '외부' 코드 관점에서 Sensor 객체의 값들만 가져오고 싶다.
+
+🤮 **Bad case**
+
+```java
+Map<Sensor> sensors = new HashMap<Sensor>();
+Sensor s = sensors.get(sensorId);
+```
+
+- Map 인터페이스가 제공하는 모든 기능이 노출된다 (clear()처럼 제공하고 싶지 않은 기능도 모두 사용이 가능해진다. - side effect의 주된 원인이 된다.)
+- 위 예시와 같이 외부 코드가 함부로 호출하면 sensor 데이터가 손상될 수 있고, 이는 의도와 벗어난다.
+
+🙂**Good case**
+
+```java
+public class Sensors {
+	private Map<Sensor> sensors = new HashMap<>();
+	
+	public Sensor getById(String sensorId) {
+		return sensors.get(sensorId)
+	}
+}
+```
+
+- 캡슐화를 통해 Map을 감춘다.
+- 위 코드처럼 우리가 제공하고싶은 기능만 외부로 노출할 수 있다.
+- 적절한 경계로 코드를 보호할 수 있다.
+
+### 2. 경계짓기(2) - 외부 코드와 호환하기 (어댑터 패턴)
+
+외부 코드를 호출할 때 우리가 원하는 방식으로 사용하고 싶다! 
+
+![스크린샷 2021-08-24 오후 11.16.59.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7f4028a6-6858-4c66-a7cd-176d5a73a7ef/스크린샷_2021-08-24_오후_11.16.59.png)
+
+Adapter 란 다른 전기나 기계 장치를 서로 연결해서 작동할 수 있도록 만들어주는 도구이다. 가장 대표적인 예로 우리가 일본여행을 갔을때 110V를 220V로 변환할 수 있는 도구를 생각하면 이해가 쉬울것이다.
+
+→ 즉, 클래스의 인터페이스를 사용자가 기대하는 다른 인터페이스로 변환하는 패턴을 어댑터 패턴이라고 한다.
+
+쉽게 말해서 B를 A처럼 포장하여 A로 사용할 수 있게 하는 패턴이다.
+
+🤔 **왜 사용해야 할까?**
+
+기존의 클래스를 재사용하려고 하나, 그 인터페이스가 원하는것과 동일하지 않을 때 호환성을 위해 사용한다.
+
+**🧚 Target Interface** : Apdapter가 implements 하는 인터페이스로, 클라이언트는 Target interface를 통해 Adaptee인 써드파티 라이브러리를 사용하게 된다.
+
+```java
+public interface Duck {
+	public void quack();
+	public void fly();
+}
+
+public class MallardDuck implements Duck {
+
+	public void quack() {
+		System.out.println("꽥! 꽥!");
+	}
+
+	public void fly() {
+		System.out.println("날라갈 수 있습니다!");
+	}
+}
+```
+
+**🧚 Adaptee :** 써드파티 라이브러리나 외부시스템을 의미합니다.
+
+```java
+public interface Turkey {
+	public void gobble();
+	public void fly();
+}
+
+public class WildTurkey implements Turkey {
+	
+	public void gobble() {
+		System.out.println("고르륵 ! 고르륵 !");
+	}
+
+	public void fly() {
+		System.out.println("짧은거리만 날라갈 수 있습니다.");
+	}
+}
+```
+
+**🧚 Adapter :** Client와 Adaptee 중간에 호환성이 없는 둘을 연결시켜주는 역할을 담당합니다. Target Interface를 implements하며, 클라이언트는 Target Interface를 통해 어댑터에 요청을 보냅니다. 어댑터는 클라이언트의 요청을 Adaptee가 이해할 수 있는 방법으로 전달하고, 처리는 Adaptee에서 이루어 집니다.
+
+```java
+public class TurkeyAdapter implements Duck {
+
+	Turkey turkey;
+
+	public TurkeyAdapter(Turkey turkey) {
+		this.turkey = turkey;
+	}
+
+	public void quack() {
+		turkey.gobble();
+	}
+
+	public void fly() {
+		turkey.fly();
+	}
+}		
+```
